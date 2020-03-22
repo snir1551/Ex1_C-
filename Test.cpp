@@ -525,9 +525,5 @@ TEST_CASE("Test replacement of i and y")
     CHECK(find(text3, "iyiyheisaiyos") == string("yiyiheysayios"));
 }
 
-TEST_CASE("Test for empty text")
-{
-    string text1 = "";
-    CHECK(find(text1, "") == string(""));
-}
+
 /* Add more test cases here */
