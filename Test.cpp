@@ -426,36 +426,36 @@ TEST_CASE("Test replacement of s and z")
 
 TEST_CASE("Test replacement of d and t")
 {
-    string text1 = "xxx dotnet.dotnet yyy";
-    CHECK(find(text1, "dotnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text1, "totnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text1, "totnet.totnet") == string("dotnet.dotnet"));
-    CHECK(find(text1, "dodnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text1, "dodned.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text1, "dodned.dodnet") == string("dotnet.dotnet"));
-    CHECK(find(text1, "dodned.dodned") == string("dotnet.dotnet"));
-    CHECK(find(text1, "dotned.dodned") == string("dotnet.dotnet"));
-    CHECK(find(text1, "todned.todned") == string("dotnet.dotnet"));
-    string text2 = "dotnet.dotnet xxx yyy";
-    CHECK(find(text2, "dotnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text2, "totnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text2, "totnet.totnet") == string("dotnet.dotnet"));
-    CHECK(find(text2, "dodnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text2, "dodned.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text2, "dodned.dodnet") == string("dotnet.dotnet"));
-    CHECK(find(text2, "dodned.dodned") == string("dotnet.dotnet"));
-    CHECK(find(text2, "dotned.dodned") == string("dotnet.dotnet"));
-    CHECK(find(text2, "todned.todned") == string("dotnet.dotnet"));
-    string text3 = "xxx yyy dotnet.dotnet";
-    CHECK(find(text3, "dotnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text3, "totnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text3, "totnet.totnet") == string("dotnet.dotnet"));
-    CHECK(find(text3, "dodnet.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text3, "dodned.dotnet") == string("dotnet.dotnet"));
-    CHECK(find(text3, "dodned.dodnet") == string("dotnet.dotnet"));
-    CHECK(find(text3, "dodned.dodned") == string("dotnet.dotnet"));
-    CHECK(find(text3, "dotned.dodned") == string("dotnet.dotnet"));
-    CHECK(find(text3, "todned.todned") == string("dotnet.dotnet"));
+    string text1 = "xxx dotnetdotnet yyy";
+    CHECK(find(text1, "dotnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text1, "totnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text1, "totnettotnet") == string("dotnetdotnet"));
+    CHECK(find(text1, "dodnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text1, "dodneddotnet") == string("dotnetdotnet"));
+    CHECK(find(text1, "dodneddodnet") == string("dotnetdotnet"));
+    CHECK(find(text1, "dodneddodned") == string("dotnetdotnet"));
+    CHECK(find(text1, "dotneddodned") == string("dotnetdotnet"));
+    CHECK(find(text1, "todnedtodned") == string("dotnetdotnet"));
+    string text2 = "dotnetdotnet xxx yyy";
+    CHECK(find(text2, "dotnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text2, "totnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text2, "totnettotnet") == string("dotnetdotnet"));
+    CHECK(find(text2, "dodnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text2, "dodneddotnet") == string("dotnetdotnet"));
+    CHECK(find(text2, "dodneddodnet") == string("dotnetdotnet"));
+    CHECK(find(text2, "dodneddodned") == string("dotnetdotnet"));
+    CHECK(find(text2, "dotneddodned") == string("dotnetdotnet"));
+    CHECK(find(text2, "todnedtodned") == string("dotnetdotnet"));
+    string text3 = "xxx yyy dotnetdotnet";
+    CHECK(find(text3, "dotnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text3, "totnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text3, "totnettotnet") == string("dotnetdotnet"));
+    CHECK(find(text3, "dodnetdotnet") == string("dotnetdotnet"));
+    CHECK(find(text3, "dodneddotnet") == string("dotnetdotnet"));
+    CHECK(find(text3, "dodneddodnet") == string("dotnetdotnet"));
+    CHECK(find(text3, "dodneddodned") == string("dotnetdotnet"));
+    CHECK(find(text3, "dotneddodned") == string("dotnetdotnet"));
+    CHECK(find(text3, "todnedtodned") == string("dotnetdotnet"));
 }
 TEST_CASE("Test replacement of o and u")
 {
@@ -953,5 +953,33 @@ TEST_CASE("empty word")
 {
     string text1 = "";
     CHECK_THROWS(find(text1, ""));
+    string text2 = "          ";
+    CHECK_THROWS(find(text2, " "));
+    string text3 = " ";
+    CHECK_THROWS(find(text3, " "));
+    string text4 = " ";
+    CHECK_THROWS(find(text4, "  "));
+    string text5 = " ";
+    CHECK_THROWS(find(text5, "          "));
+    string text6 = "";
+    CHECK_THROWS(find(text5, "          "));
+    
+}
+
+TEST_CASE("space in the text")
+{
+    string text1 = " hello";
+    CHECK(find(text1, "hello") == string("hello"));
+    string text2 = "          hello";
+    CHECK(find(text2, "hello") == string("hello"));
+    string text3 = "hello ";
+    CHECK(find(text3, "hello") == string("hello"));
+    string text4 = "hello          ";
+    CHECK(find(text4, "hello") == string("hello"));
+    string text5 = " hello ";
+    CHECK(find(text5, "hello") == string("hello"));
+    string text6 = "          hello          ";
+    CHECK(find(text6, "hello") == string("hello"));
+    
 }
 /* Add more test cases here */
